@@ -6,6 +6,6 @@ import com.jing.model.entity.User;
 
 public interface UserService {
 
-	User queryUserList();
+	List<User> queryUserList();
 
 }

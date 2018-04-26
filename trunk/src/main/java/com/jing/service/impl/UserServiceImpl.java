@@ -1,5 +1,7 @@
 package com.jing.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,9 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 	
 	@Override
-	public User queryUserList() {
+	public List<User> queryUserList() {
 		
-		return userMapper.selectByPrimaryKey(1);
+		return userMapper.queryUserList();
 	}
 
 	
