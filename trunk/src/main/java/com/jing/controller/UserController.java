@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +36,9 @@ public class UserController {
 	@RequestMapping(value ="/testlist", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public Object testSession(HttpServletRequest request, HttpServletResponse response){
 		@SuppressWarnings("unchecked")
-		List<User> list = (List<User>)request.getSession().getAttribute("user");
-		System.out.println(list.size());
+		HttpSession session = request.getSession();
+		List<User> list = (List<User>)session.getAttribute("user");
+		System.out.println(list.size()+"-----"+session.getId());
 		return null;
 	}
 }
