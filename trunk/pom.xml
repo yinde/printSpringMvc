@@ -246,8 +246,9 @@
 			</plugin>
 		</plugins>
 		</pluginManagement>
+		
+		<defaultGoal>compile</defaultGoal>
 	</build>
-
 	<profiles>
 		<profile>
 			<id>dev</id>
