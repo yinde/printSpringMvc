@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbsjk.model.dao.ExaminationInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zbsjk.model.entity.ExaminationInfo">
+    <id column="examination_id" jdbcType="INTEGER" property="examinationId" />
+    <result column="examination_results" jdbcType="INTEGER" property="examinationResults" />
+    <result column="equipment_number" jdbcType="VARCHAR" property="equipmentNumber" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="watch_time" jdbcType="VARCHAR" property="watchTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    examination_id, examination_results, equipment_number, user_name, watch_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examination_info
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examination_info
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zbsjk.model.entity.ExaminationInfo">
+    insert into examination_info (examination_id, examination_results, 
+      equipment_number, user_name, watch_time
+      )
+    values (#{examinationId,jdbcType=INTEGER}, #{examinationResults,jdbcType=INTEGER}, 
+      #{equipmentNumber,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{watchTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zbsjk.model.entity.ExaminationInfo">
+    insert into examination_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examinationId != null">
+        examination_id,
+      </if>
+      <if test="examinationResults != null">
+        examination_results,
+      </if>
+      <if test="equipmentNumber != null">
+        equipment_number,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="watchTime != null">
+        watch_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examinationId != null">
+        #{examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationResults != null">
+        #{examinationResults,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentNumber != null">
+        #{equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="watchTime != null">
+        #{watchTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zbsjk.model.entity.ExaminationInfo">
+    update examination_info
+    <set>
+      <if test="examinationResults != null">
+        examination_results = #{examinationResults,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentNumber != null">
+        equipment_number = #{equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="watchTime != null">
+        watch_time = #{watchTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zbsjk.model.entity.ExaminationInfo">
+    update examination_info
+    set examination_results = #{examinationResults,jdbcType=INTEGER},
+      equipment_number = #{equipmentNumber,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      watch_time = #{watchTime,jdbcType=VARCHAR}
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </update>
+</mapper>

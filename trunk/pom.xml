@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>t1</groupId>
-	<artifactId>t1</artifactId>
+	<groupId>zbsjk</groupId>
+	<artifactId>zbsjk</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 
@@ -180,7 +180,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>t1</finalName>
+		<finalName>zbsjk</finalName>
 		<resources>
 			<!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
 			<resource>

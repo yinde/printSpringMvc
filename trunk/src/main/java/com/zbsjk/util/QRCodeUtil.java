@@ -1,4 +1,5 @@
-package com.jing.util;
+package com.zbsjk.util;
+
 
 /** 
  * 二维码生成工具类 

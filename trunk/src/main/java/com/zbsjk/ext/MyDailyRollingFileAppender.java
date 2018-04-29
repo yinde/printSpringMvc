@@ -1,4 +1,5 @@
-package com.jing.ext;
+package com.zbsjk.ext;
+
 
 import org.apache.log4j.DailyRollingFileAppender;
 import org.apache.log4j.Priority;

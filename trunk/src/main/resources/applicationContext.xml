@@ -29,16 +29,18 @@
     <tx:annotation-driven transaction-manager="txManager" />  
     
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.jing.model.dao" />
+        <property name="basePackage" value="com.zbsjk.model.dao" />
     </bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath:com/jing/model/mapping/*Mapper.xml" />
+        <property name="mapperLocations" value="classpath:com/zbsjk/model/mapping/*Mapper.xml" />
         <property name="configLocation" value="classpath:mybatis-config.xml" />
     </bean>
 	
-    <context:component-scan base-package="com.jing.service">
+    <context:component-scan base-package="com.zbsjk.service">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
+	
+	<bean id="exceptionHandler" class="com.zbsjk.ext.GlobalExceptionHandler"/>  
 </beans>

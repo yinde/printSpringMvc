@@ -1,10 +1,12 @@
-package com.jing.model.dao;
+package com.zbsjk.model.dao;
+
+
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jing.model.entity.User;
+import com.zbsjk.model.entity.User;
 
 @Mapper
 public interface UserMapper {

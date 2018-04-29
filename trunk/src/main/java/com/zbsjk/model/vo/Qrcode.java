@@ -1,4 +1,6 @@
-package com.jing.model.vo;
+package com.zbsjk.model.vo;
+
+
 
 public class Qrcode {
 

@@ -1,8 +1,10 @@
-package com.jing.service;
+package com.zbsjk.service;
+
+
 
 import java.util.List;
 
-import com.jing.model.entity.User;
+import com.zbsjk.model.entity.User;
 
 public interface UserService {
 

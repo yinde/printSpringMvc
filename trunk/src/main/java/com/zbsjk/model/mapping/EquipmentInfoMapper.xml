@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbsjk.model.dao.EquipmentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zbsjk.model.entity.EquipmentInfo">
+    <id column="equipment_number" jdbcType="VARCHAR" property="equipmentNumber" />
+    <result column="register_number" jdbcType="VARCHAR" property="registerNumber" />
+    <result column="register_company" jdbcType="VARCHAR" property="registerCompany" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_id_card" jdbcType="VARCHAR" property="userIdCard" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+    <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="equipment_province" jdbcType="VARCHAR" property="equipmentProvince" />
+    <result column="equipment_city" jdbcType="VARCHAR" property="equipmentCity" />
+    <result column="equipment_area" jdbcType="VARCHAR" property="equipmentArea" />
+    <result column="equipment_brand" jdbcType="VARCHAR" property="equipmentBrand" />
+    <result column="equipment_type" jdbcType="VARCHAR" property="equipmentType" />
+    <result column="equipment_model" jdbcType="VARCHAR" property="equipmentModel" />
+    <result column="machine_number" jdbcType="VARCHAR" property="machineNumber" />
+    <result column="engine_number" jdbcType="VARCHAR" property="engineNumber" />
+    <result column="engine_power" jdbcType="VARCHAR" property="enginePower" />
+    <result column="bucket_capacity" jdbcType="VARCHAR" property="bucketCapacity" />
+    <result column="machine_quality" jdbcType="VARCHAR" property="machineQuality" />
+    <result column="equipment_tyre" jdbcType="VARCHAR" property="equipmentTyre" />
+    <result column="equipment_track" jdbcType="VARCHAR" property="equipmentTrack" />
+    <result column="insurance_agency" jdbcType="VARCHAR" property="insuranceAgency" />
+    <result column="insurance_insurance" jdbcType="VARCHAR" property="insuranceInsurance" />
+    <result column="equipment_long" jdbcType="VARCHAR" property="equipmentLong" />
+    <result column="equipment_wide" jdbcType="VARCHAR" property="equipmentWide" />
+    <result column="equipment_hight" jdbcType="VARCHAR" property="equipmentHight" />
+    <result column="purchase_method" jdbcType="VARCHAR" property="purchaseMethod" />
+    <result column="fuel_variety" jdbcType="VARCHAR" property="fuelVariety" />
+    <result column="fuel_source" jdbcType="VARCHAR" property="fuelSource" />
+    <result column="equipment_contaminants" jdbcType="VARCHAR" property="equipmentContaminants" />
+    <result column="noise_detection" jdbcType="VARCHAR" property="noiseDetection" />
+    <result column="discharge_stage" jdbcType="VARCHAR" property="dischargeStage" />
+    <result column="exhaust_emission" jdbcType="VARCHAR" property="exhaustEmission" />
+    <result column="purchase_time" jdbcType="TIMESTAMP" property="purchaseTime" />
+    <result column="qr_code" jdbcType="VARCHAR" property="qrCode" />
+    <result column="audit_status" jdbcType="TINYINT" property="auditStatus" />
+    <result column="audit_auditor" jdbcType="INTEGER" property="auditAuditor" />
+    <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="rescue_status" jdbcType="TINYINT" property="rescueStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    equipment_number, register_number, register_company, user_name, user_id_card, company_name, 
+    credit_code, user_address, user_phone, equipment_province, equipment_city, equipment_area, 
+    equipment_brand, equipment_type, equipment_model, machine_number, engine_number, 
+    engine_power, bucket_capacity, machine_quality, equipment_tyre, equipment_track, 
+    insurance_agency, insurance_insurance, equipment_long, equipment_wide, equipment_hight, 
+    purchase_method, fuel_variety, fuel_source, equipment_contaminants, noise_detection, 
+    discharge_stage, exhaust_emission, purchase_time, qr_code, audit_status, audit_auditor, 
+    audit_time, create_time, rescue_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from equipment_info
+    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from equipment_info
+    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zbsjk.model.entity.EquipmentInfo">
+    insert into equipment_info (equipment_number, register_number, 
+      register_company, user_name, user_id_card, 
+      company_name, credit_code, user_address, 
+      user_phone, equipment_province, equipment_city, 
+      equipment_area, equipment_brand, equipment_type, 
+      equipment_model, machine_number, engine_number, 
+      engine_power, bucket_capacity, machine_quality, 
+      equipment_tyre, equipment_track, insurance_agency, 
+      insurance_insurance, equipment_long, equipment_wide, 
+      equipment_hight, purchase_method, fuel_variety, 
+      fuel_source, equipment_contaminants, noise_detection, 
+      discharge_stage, exhaust_emission, purchase_time, 
+      qr_code, audit_status, audit_auditor, 
+      audit_time, create_time, rescue_status
+      )
+    values (#{equipmentNumber,jdbcType=VARCHAR}, #{registerNumber,jdbcType=VARCHAR}, 
+      #{registerCompany,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userIdCard,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{equipmentProvince,jdbcType=VARCHAR}, #{equipmentCity,jdbcType=VARCHAR}, 
+      #{equipmentArea,jdbcType=VARCHAR}, #{equipmentBrand,jdbcType=VARCHAR}, #{equipmentType,jdbcType=VARCHAR}, 
+      #{equipmentModel,jdbcType=VARCHAR}, #{machineNumber,jdbcType=VARCHAR}, #{engineNumber,jdbcType=VARCHAR}, 
+      #{enginePower,jdbcType=VARCHAR}, #{bucketCapacity,jdbcType=VARCHAR}, #{machineQuality,jdbcType=VARCHAR}, 
+      #{equipmentTyre,jdbcType=VARCHAR}, #{equipmentTrack,jdbcType=VARCHAR}, #{insuranceAgency,jdbcType=VARCHAR}, 
+      #{insuranceInsurance,jdbcType=VARCHAR}, #{equipmentLong,jdbcType=VARCHAR}, #{equipmentWide,jdbcType=VARCHAR}, 
+      #{equipmentHight,jdbcType=VARCHAR}, #{purchaseMethod,jdbcType=VARCHAR}, #{fuelVariety,jdbcType=VARCHAR}, 
+      #{fuelSource,jdbcType=VARCHAR}, #{equipmentContaminants,jdbcType=VARCHAR}, #{noiseDetection,jdbcType=VARCHAR}, 
+      #{dischargeStage,jdbcType=VARCHAR}, #{exhaustEmission,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP}, 
+      #{qrCode,jdbcType=VARCHAR}, #{auditStatus,jdbcType=TINYINT}, #{auditAuditor,jdbcType=INTEGER}, 
+      #{auditTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{rescueStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zbsjk.model.entity.EquipmentInfo">
+    insert into equipment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="equipmentNumber != null">
+        equipment_number,
+      </if>
+      <if test="registerNumber != null">
+        register_number,
+      </if>
+      <if test="registerCompany != null">
+        register_company,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userIdCard != null">
+        user_id_card,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="creditCode != null">
+        credit_code,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="equipmentProvince != null">
+        equipment_province,
+      </if>
+      <if test="equipmentCity != null">
+        equipment_city,
+      </if>
+      <if test="equipmentArea != null">
+        equipment_area,
+      </if>
+      <if test="equipmentBrand != null">
+        equipment_brand,
+      </if>
+      <if test="equipmentType != null">
+        equipment_type,
+      </if>
+      <if test="equipmentModel != null">
+        equipment_model,
+      </if>
+      <if test="machineNumber != null">
+        machine_number,
+      </if>
+      <if test="engineNumber != null">
+        engine_number,
+      </if>
+      <if test="enginePower != null">
+        engine_power,
+      </if>
+      <if test="bucketCapacity != null">
+        bucket_capacity,
+      </if>
+      <if test="machineQuality != null">
+        machine_quality,
+      </if>
+      <if test="equipmentTyre != null">
+        equipment_tyre,
+      </if>
+      <if test="equipmentTrack != null">
+        equipment_track,
+      </if>
+      <if test="insuranceAgency != null">
+        insurance_agency,
+      </if>
+      <if test="insuranceInsurance != null">
+        insurance_insurance,
+      </if>
+      <if test="equipmentLong != null">
+        equipment_long,
+      </if>
+      <if test="equipmentWide != null">
+        equipment_wide,
+      </if>
+      <if test="equipmentHight != null">
+        equipment_hight,
+      </if>
+      <if test="purchaseMethod != null">
+        purchase_method,
+      </if>
+      <if test="fuelVariety != null">
+        fuel_variety,
+      </if>
+      <if test="fuelSource != null">
+        fuel_source,
+      </if>
+      <if test="equipmentContaminants != null">
+        equipment_contaminants,
+      </if>
+      <if test="noiseDetection != null">
+        noise_detection,
+      </if>
+      <if test="dischargeStage != null">
+        discharge_stage,
+      </if>
+      <if test="exhaustEmission != null">
+        exhaust_emission,
+      </if>
+      <if test="purchaseTime != null">
+        purchase_time,
+      </if>
+      <if test="qrCode != null">
+        qr_code,
+      </if>
+      <if test="auditStatus != null">
+        audit_status,
+      </if>
+      <if test="auditAuditor != null">
+        audit_auditor,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="rescueStatus != null">
+        rescue_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="equipmentNumber != null">
+        #{equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="registerNumber != null">
+        #{registerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCompany != null">
+        #{registerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdCard != null">
+        #{userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentProvince != null">
+        #{equipmentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentCity != null">
+        #{equipmentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentArea != null">
+        #{equipmentArea,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentBrand != null">
+        #{equipmentBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentType != null">
+        #{equipmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentModel != null">
+        #{equipmentModel,jdbcType=VARCHAR},
+      </if>
+      <if test="machineNumber != null">
+        #{machineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNumber != null">
+        #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="enginePower != null">
+        #{enginePower,jdbcType=VARCHAR},
+      </if>
+      <if test="bucketCapacity != null">
+        #{bucketCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="machineQuality != null">
+        #{machineQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentTyre != null">
+        #{equipmentTyre,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentTrack != null">
+        #{equipmentTrack,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceAgency != null">
+        #{insuranceAgency,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceInsurance != null">
+        #{insuranceInsurance,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentLong != null">
+        #{equipmentLong,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentWide != null">
+        #{equipmentWide,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentHight != null">
+        #{equipmentHight,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseMethod != null">
+        #{purchaseMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelVariety != null">
+        #{fuelVariety,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelSource != null">
+        #{fuelSource,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentContaminants != null">
+        #{equipmentContaminants,jdbcType=VARCHAR},
+      </if>
+      <if test="noiseDetection != null">
+        #{noiseDetection,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeStage != null">
+        #{dischargeStage,jdbcType=VARCHAR},
+      </if>
+      <if test="exhaustEmission != null">
+        #{exhaustEmission,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseTime != null">
+        #{purchaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qrCode != null">
+        #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        #{auditStatus,jdbcType=TINYINT},
+      </if>
+      <if test="auditAuditor != null">
+        #{auditAuditor,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rescueStatus != null">
+        #{rescueStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zbsjk.model.entity.EquipmentInfo">
+    update equipment_info
+    <set>
+      <if test="registerNumber != null">
+        register_number = #{registerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCompany != null">
+        register_company = #{registerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdCard != null">
+        user_id_card = #{userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentProvince != null">
+        equipment_province = #{equipmentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentCity != null">
+        equipment_city = #{equipmentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentArea != null">
+        equipment_area = #{equipmentArea,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentBrand != null">
+        equipment_brand = #{equipmentBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentType != null">
+        equipment_type = #{equipmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentModel != null">
+        equipment_model = #{equipmentModel,jdbcType=VARCHAR},
+      </if>
+      <if test="machineNumber != null">
+        machine_number = #{machineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNumber != null">
+        engine_number = #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="enginePower != null">
+        engine_power = #{enginePower,jdbcType=VARCHAR},
+      </if>
+      <if test="bucketCapacity != null">
+        bucket_capacity = #{bucketCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="machineQuality != null">
+        machine_quality = #{machineQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentTyre != null">
+        equipment_tyre = #{equipmentTyre,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentTrack != null">
+        equipment_track = #{equipmentTrack,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceAgency != null">
+        insurance_agency = #{insuranceAgency,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceInsurance != null">
+        insurance_insurance = #{insuranceInsurance,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentLong != null">
+        equipment_long = #{equipmentLong,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentWide != null">
+        equipment_wide = #{equipmentWide,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentHight != null">
+        equipment_hight = #{equipmentHight,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseMethod != null">
+        purchase_method = #{purchaseMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelVariety != null">
+        fuel_variety = #{fuelVariety,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelSource != null">
+        fuel_source = #{fuelSource,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentContaminants != null">
+        equipment_contaminants = #{equipmentContaminants,jdbcType=VARCHAR},
+      </if>
+      <if test="noiseDetection != null">
+        noise_detection = #{noiseDetection,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeStage != null">
+        discharge_stage = #{dischargeStage,jdbcType=VARCHAR},
+      </if>
+      <if test="exhaustEmission != null">
+        exhaust_emission = #{exhaustEmission,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseTime != null">
+        purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qrCode != null">
+        qr_code = #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        audit_status = #{auditStatus,jdbcType=TINYINT},
+      </if>
+      <if test="auditAuditor != null">
+        audit_auditor = #{auditAuditor,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null">
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rescueStatus != null">
+        rescue_status = #{rescueStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zbsjk.model.entity.EquipmentInfo">
+    update equipment_info
+    set register_number = #{registerNumber,jdbcType=VARCHAR},
+      register_company = #{registerCompany,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_id_card = #{userIdCard,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      equipment_province = #{equipmentProvince,jdbcType=VARCHAR},
+      equipment_city = #{equipmentCity,jdbcType=VARCHAR},
+      equipment_area = #{equipmentArea,jdbcType=VARCHAR},
+      equipment_brand = #{equipmentBrand,jdbcType=VARCHAR},
+      equipment_type = #{equipmentType,jdbcType=VARCHAR},
+      equipment_model = #{equipmentModel,jdbcType=VARCHAR},
+      machine_number = #{machineNumber,jdbcType=VARCHAR},
+      engine_number = #{engineNumber,jdbcType=VARCHAR},
+      engine_power = #{enginePower,jdbcType=VARCHAR},
+      bucket_capacity = #{bucketCapacity,jdbcType=VARCHAR},
+      machine_quality = #{machineQuality,jdbcType=VARCHAR},
+      equipment_tyre = #{equipmentTyre,jdbcType=VARCHAR},
+      equipment_track = #{equipmentTrack,jdbcType=VARCHAR},
+      insurance_agency = #{insuranceAgency,jdbcType=VARCHAR},
+      insurance_insurance = #{insuranceInsurance,jdbcType=VARCHAR},
+      equipment_long = #{equipmentLong,jdbcType=VARCHAR},
+      equipment_wide = #{equipmentWide,jdbcType=VARCHAR},
+      equipment_hight = #{equipmentHight,jdbcType=VARCHAR},
+      purchase_method = #{purchaseMethod,jdbcType=VARCHAR},
+      fuel_variety = #{fuelVariety,jdbcType=VARCHAR},
+      fuel_source = #{fuelSource,jdbcType=VARCHAR},
+      equipment_contaminants = #{equipmentContaminants,jdbcType=VARCHAR},
+      noise_detection = #{noiseDetection,jdbcType=VARCHAR},
+      discharge_stage = #{dischargeStage,jdbcType=VARCHAR},
+      exhaust_emission = #{exhaustEmission,jdbcType=VARCHAR},
+      purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=TINYINT},
+      audit_auditor = #{auditAuditor,jdbcType=INTEGER},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      rescue_status = #{rescueStatus,jdbcType=TINYINT}
+    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>
