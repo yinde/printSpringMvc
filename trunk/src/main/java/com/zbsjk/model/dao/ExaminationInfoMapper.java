@@ -1,5 +1,7 @@
 package com.zbsjk.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.zbsjk.model.entity.ExaminationInfo;
@@ -17,4 +19,6 @@ public interface ExaminationInfoMapper {
     int updateByPrimaryKeySelective(ExaminationInfo record);
 
     int updateByPrimaryKey(ExaminationInfo record);
+
+	List<ExaminationInfo> queryByProperties(ExaminationInfo eif);
 }

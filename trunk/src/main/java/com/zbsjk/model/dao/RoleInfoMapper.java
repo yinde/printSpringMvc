@@ -1,5 +1,7 @@
 package com.zbsjk.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.zbsjk.model.entity.RoleInfo;
@@ -17,4 +19,6 @@ public interface RoleInfoMapper {
     int updateByPrimaryKeySelective(RoleInfo record);
 
     int updateByPrimaryKey(RoleInfo record);
+
+	List<RoleInfo> queryRoleList();
 }

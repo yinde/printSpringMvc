@@ -43,6 +43,8 @@
     <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="rescue_status" jdbcType="TINYINT" property="rescueStatus" />
+    <result column="qr_code_path" jdbcType="VARCHAR" property="qrCodePath" />
+    
   </resultMap>
   <sql id="Base_Column_List">
     equipment_number, register_number, register_company, user_name, user_id_card, company_name, 
@@ -52,7 +54,18 @@
     insurance_agency, insurance_insurance, equipment_long, equipment_wide, equipment_hight, 
     purchase_method, fuel_variety, fuel_source, equipment_contaminants, noise_detection, 
     discharge_stage, exhaust_emission, purchase_time, qr_code, audit_status, audit_auditor, 
-    audit_time, create_time, rescue_status
+    audit_time, create_time, rescue_status,qr_code_path
+  </sql>
+  <sql id="query_items_where">
+	<if test="userName!=null">user_name=#{userName}</if>
+	<if test="equipmentNumber!=null">equipment_number=#{equipmentNumber}</if>
+	<if test="auditStatus!=null">audit_status=#{auditStatus}</if>
+  	<if test="equipmentCity !=null">equipment_city=#{equipmentCity}</if>
+  	<if test="equipmentArea !=null">equipment_area=#{equipmentArea}</if>
+  	<if test="equipmentType !=null">equipment_type=#{equipmentType}</if>
+  	<if test="insuranceAgency !=null">insurance_agency LIKE CONCAT('%',#{insuranceAgency},'%')</if>
+  	<if test="startTime !=null">create_time &gt;=#{startTime}</if>
+  	<if test="endTime !=null">create_time &lt;=#{endTime}</if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -78,7 +91,7 @@
       fuel_source, equipment_contaminants, noise_detection, 
       discharge_stage, exhaust_emission, purchase_time, 
       qr_code, audit_status, audit_auditor, 
-      audit_time, create_time, rescue_status
+      audit_time, create_time, rescue_status,qr_code_path
       )
     values (#{equipmentNumber,jdbcType=VARCHAR}, #{registerNumber,jdbcType=VARCHAR}, 
       #{registerCompany,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userIdCard,jdbcType=VARCHAR}, 
@@ -93,7 +106,7 @@
       #{fuelSource,jdbcType=VARCHAR}, #{equipmentContaminants,jdbcType=VARCHAR}, #{noiseDetection,jdbcType=VARCHAR}, 
       #{dischargeStage,jdbcType=VARCHAR}, #{exhaustEmission,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP}, 
       #{qrCode,jdbcType=VARCHAR}, #{auditStatus,jdbcType=TINYINT}, #{auditAuditor,jdbcType=INTEGER}, 
-      #{auditTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{rescueStatus,jdbcType=TINYINT}
+      #{auditTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{rescueStatus,jdbcType=TINYINT},#{qrCodePath,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zbsjk.model.entity.EquipmentInfo">
@@ -222,6 +235,9 @@
       <if test="rescueStatus != null">
         rescue_status,
       </if>
+       <if test="qrCodePath != null">
+        qr_code_path,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="equipmentNumber != null">
@@ -346,6 +362,9 @@
       </if>
       <if test="rescueStatus != null">
         #{rescueStatus,jdbcType=TINYINT},
+      </if>
+       <if test="qrCodePath != null">
+        #{qrCodePath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -472,6 +491,9 @@
       <if test="rescueStatus != null">
         rescue_status = #{rescueStatus,jdbcType=TINYINT},
       </if>
+       <if test="qrCodePath != null">
+        qr_code_path = #{qrCodePath,jdbcType=TINYINT},
+      </if>
     </set>
     where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
   </update>
@@ -516,7 +538,15 @@
       audit_auditor = #{auditAuditor,jdbcType=INTEGER},
       audit_time = #{auditTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      rescue_status = #{rescueStatus,jdbcType=TINYINT}
+      rescue_status = #{rescueStatus,jdbcType=TINYINT},
+      qr_code_path = #{qrCodePath,jdbcType=VARCHAR}
     where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
   </update>
+  
+<select id="queryByProperties" resultMap="BaseResultMap" parameterType="map">
+	select * from equipment_info
+	<where>
+		<include refid="query_items_where"></include>
+	</where>
+</select>
 </mapper>

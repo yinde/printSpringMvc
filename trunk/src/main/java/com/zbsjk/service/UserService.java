@@ -1,13 +1,20 @@
 package com.zbsjk.service;
 
-
-
-import java.util.List;
-
-import com.zbsjk.model.entity.User;
+import com.zbsjk.model.entity.UserInfo;
+import com.zbsjk.model.vo.PutpwdVo;
 
 public interface UserService {
 
-	List<User> queryUserList();
+	Object addUser(UserInfo userInfo);
+
+	Object updateUser(UserInfo userInfo);
+
+	Object deleteUser(Integer userId);
+
+	Object getUserList(UserInfo userInfo, Integer pageNo, Integer pageSize);
+
+	Object putpwd(PutpwdVo putpwdVo,Integer userId);
+
+	Object resetpwd(Integer userId);
 
 }

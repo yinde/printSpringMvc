@@ -75,7 +75,7 @@ public class EquipmentInfo {
 
     private String qrCode;
 
-    private Byte auditStatus;
+    private Integer auditStatus;
 
     private Integer auditAuditor;
 
@@ -83,9 +83,19 @@ public class EquipmentInfo {
 
     private Date createTime;
 
-    private Byte rescueStatus;
+    private Integer rescueStatus;
+    
+    private String qrCodePath;
 
-    public String getEquipmentNumber() {
+    public String getQrCodePath() {
+		return qrCodePath;
+	}
+
+	public void setQrCodePath(String qrCodePath) {
+		this.qrCodePath = qrCodePath;
+	}
+
+	public String getEquipmentNumber() {
         return equipmentNumber;
     }
 
@@ -373,11 +383,11 @@ public class EquipmentInfo {
         this.qrCode = qrCode == null ? null : qrCode.trim();
     }
 
-    public Byte getAuditStatus() {
+    public Integer getAuditStatus() {
         return auditStatus;
     }
 
-    public void setAuditStatus(Byte auditStatus) {
+    public void setAuditStatus(Integer auditStatus) {
         this.auditStatus = auditStatus;
     }
 
@@ -405,11 +415,11 @@ public class EquipmentInfo {
         this.createTime = createTime;
     }
 
-    public Byte getRescueStatus() {
+    public Integer getRescueStatus() {
         return rescueStatus;
     }
 
-    public void setRescueStatus(Byte rescueStatus) {
+    public void setRescueStatus(Integer rescueStatus) {
         this.rescueStatus = rescueStatus;
     }
 }

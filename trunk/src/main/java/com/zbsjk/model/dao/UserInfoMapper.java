@@ -1,5 +1,7 @@
 package com.zbsjk.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.zbsjk.model.entity.UserInfo;
@@ -17,4 +19,6 @@ public interface UserInfoMapper {
     int updateByPrimaryKeySelective(UserInfo record);
 
     int updateByPrimaryKey(UserInfo record);
+
+	List<UserInfo> queryUserList(UserInfo userInfo);
 }

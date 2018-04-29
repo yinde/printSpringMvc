@@ -17,6 +17,13 @@
     user_id, user_name, user_sex, user_phone, role_id, user__province, user_city, user_area, 
     user_pwd, create_time
   </sql>
+  <sql id="query_items_where">
+  	<if test="userCity!=null">user_city=#{userCity}</if>
+	<if test="userArea!=null">user_area=#{userArea}</if>
+	<if test="userName!=null">user_name=#{userName}</if>
+	<if test="userPhone!=null">user_phone=#{userPhone}</if>
+	<if test="userPwd!=null">user_pwd=#{userPwd}</if>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -150,4 +157,11 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  
+  <select id="queryUserList" resultMap="BaseResultMap" parameterType="map">
+    select user_id, user_name, user_sex, user_phone, role_id, user__province, user_city, user_area, create_time from user_info
+    <where>
+    	<include refid="query_items_where"></include>
+    </where>
+  </select>
 </mapper>
