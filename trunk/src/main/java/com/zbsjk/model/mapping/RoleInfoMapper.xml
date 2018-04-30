@@ -56,7 +56,10 @@
     where role_id = #{roleId,jdbcType=INTEGER}
   </update>
   
-  <select id="queryRoleList" resultMap="BaseResultMap">
-  	select * from role_info
+  <select id="queryRoleList" resultMap="BaseResultMap" parameterType="java.util.List">
+  	select * from role_info where role_id in
+  	 <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                #{item}       
+        </foreach>    
   </select>
 </mapper>

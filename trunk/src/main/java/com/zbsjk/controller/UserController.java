@@ -69,7 +69,7 @@ public class UserController {
 		
 		if(user.getRoleId().equals(2)){
 			userInfo.setUserCity(user.getUserCity());
-		}else if(user.getRoleId().equals(4)){
+		}else if(user.getRoleId().equals(3)){
 			userInfo.setUserCity(user.getUserCity());
 			userInfo.setUserArea(user.getUserArea());
 		}else if(user.getRoleId().equals(1)){

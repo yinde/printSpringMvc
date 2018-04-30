@@ -20,5 +20,5 @@ public interface RoleInfoMapper {
 
     int updateByPrimaryKey(RoleInfo record);
 
-	List<RoleInfo> queryRoleList();
+	List<RoleInfo> queryRoleList(List<Integer> list);
 }

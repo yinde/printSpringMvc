@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Object getUserList(UserInfo userInfo, Integer pageNo, Integer pageSize) {
-		PageHelper.startPage(pageNo, pageSize);
+		PageHelper.startPage(pageNo, pageSize,"role_id asc");
 		List<UserInfo> userlist = userInfoMapper.queryUserList(userInfo);
 		PageInfo<UserInfo> pageInfo = new PageInfo<>(userlist);  
 		return pageInfo;
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 		userInfo.setUserPhone(putpwdVo.getAccount());
 		List<UserInfo> list = userInfoMapper.queryUserList(userInfo);
 		if(list.size()==0){
-			throw new ParamException("account", "密码不正确");
+			throw new ParamException("account", "原始密码不正确");
 		}
 		
 		UserInfo userInfoData = new UserInfo();
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 	public Object resetpwd(Integer userId) {
 		UserInfo userInfoData = new UserInfo();
 		userInfoData.setUserId(userId);
-		userInfoData.setUserPwd("111111");
+		userInfoData.setUserPwd("123456");
 		return userInfoMapper.updateByPrimaryKeySelective(userInfoData);
 	}
 

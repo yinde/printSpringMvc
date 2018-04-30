@@ -2,6 +2,9 @@ package com.zbsjk.controller;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -40,6 +43,35 @@ public class LoginController {
 	public Object getRoleList(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam Integer pageNo,
 			@RequestParam Integer pageSize){
-		return loginService.getRoleList(pageNo,pageSize);
+		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
+		if(null==user){
+			throw new SecurityException("user", "请先登录");
+		}
+		
+		List<Integer> list = new ArrayList<>();
+		switch (user.getRoleId()) {
+		case 1:  //超级管理员
+			list.add(2);
+			list.add(3);
+			list.add(4);
+			list.add(5);
+			list.add(6);
+			list.add(7);
+			break;
+		case 2:	//市管理员
+			list.add(3);
+			list.add(4);
+			list.add(5);
+			list.add(6);
+			list.add(7);
+			break;
+		case 3:	//区管理员
+			list.add(5);
+			list.add(7);
+			break;
+		default:
+			break;
+		}
+		return loginService.getRoleList(pageNo,pageSize,list);
 	}
 }

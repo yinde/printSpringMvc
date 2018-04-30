@@ -69,7 +69,7 @@ public class EquipmentContoller {
 			throw new SecurityException("user", "请先登录");
 		}
 		
-		if(!user.getRoleId().equals(1) && !user.getRoleId().equals(2) && !user.getRoleId().equals(4)){
+		if(!user.getRoleId().equals(1) && !user.getRoleId().equals(2) && !user.getRoleId().equals(3)){
 			throw new SecurityException("user", "只有管理员能够删除");
 		}
 		
@@ -102,10 +102,10 @@ public class EquipmentContoller {
 			throw new SecurityException("user", "请先登录");
 		}
 		
-		if(user.getRoleId().equals(2) || user.getRoleId().equals(3) || user.getRoleId().equals(6)){
+		if(user.getRoleId().equals(2) || user.getRoleId().equals(4) || user.getRoleId().equals(6)){
 			equipmentListVo.setEquipmentCity(user.getUserCity());
 		}
-		if(user.getRoleId().equals(4) || user.getRoleId().equals(5) || user.getRoleId().equals(7)){
+		if(user.getRoleId().equals(3) || user.getRoleId().equals(5) || user.getRoleId().equals(7)){
 			equipmentListVo.setEquipmentCity(user.getUserCity());
 			equipmentListVo.setEquipmentArea(user.getUserArea());
 		}
@@ -123,9 +123,9 @@ public class EquipmentContoller {
 		}
 		
 		if(!user.getRoleId().equals(1) && !user.getRoleId().equals(2)
+				&& !user.getRoleId().equals(3)
 				&& !user.getRoleId().equals(4)
-				&& !user.getRoleId().equals(6)
-				&& !user.getRoleId().equals(7)){
+				&& !user.getRoleId().equals(5)){
 			throw new SecurityException("user", "只有管理员和审核员能审核");
 		}
 		
