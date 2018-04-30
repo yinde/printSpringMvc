@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zbsjk.ext.SecurityException;
 import com.zbsjk.model.entity.UserInfo;
 import com.zbsjk.model.vo.PutpwdVo;
 import com.zbsjk.service.LoginService;
@@ -26,6 +27,11 @@ public class LoginController {
 	public Object login(HttpServletRequest request, HttpServletResponse response,
 			@RequestBody PutpwdVo putpwdVo){
 		UserInfo user = (UserInfo)loginService.login(putpwdVo);
+		if(putpwdVo.getLoginType().equals("yingji")){
+			if(!user.getRoleId().equals(1)&&!user.getRoleId().equals(2)&&!user.getRoleId().equals(4)){
+				throw new SecurityException("user", "无登录权限");
+			}
+		}
 		request.getSession().setAttribute("user", user);
 		return user;
 	}

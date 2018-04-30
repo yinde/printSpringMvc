@@ -9,7 +9,7 @@ public interface EquipmentService {
 
 	Object updateEquipment(EquipmentInfo equipmentInfo);
 
-	Object queryEquipment(String equipmentNumber);
+	Object queryEquipment(String equipmentNumber,String userName);
 
 	Object deleteEquipment(String equipmentNumber);
 

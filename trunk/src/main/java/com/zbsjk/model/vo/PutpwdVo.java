@@ -10,6 +10,16 @@ public class PutpwdVo {
 	
 	private String pwd;
 	
+	private String loginType;//应急 yingji,管理guanli
+	
+	public String getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
+	}
+
 	public String getPwd() {
 		return pwd;
 	}

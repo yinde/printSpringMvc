@@ -8,6 +8,9 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext*.xml</param-value>
   </context-param>
+  <session-config>
+ <session-timeout>30</session-timeout>
+ </session-config>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

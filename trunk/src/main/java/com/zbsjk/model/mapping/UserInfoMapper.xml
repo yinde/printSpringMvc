@@ -7,15 +7,15 @@
     <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
-    <result column="user__province" jdbcType="VARCHAR" property="userProvince" />
+    <result column="user_province" jdbcType="VARCHAR" property="userProvince" />
     <result column="user_city" jdbcType="VARCHAR" property="userCity" />
     <result column="user_area" jdbcType="VARCHAR" property="userArea" />
     <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, user_name, user_sex, user_phone, role_id, user__province, user_city, user_area, 
-    user_pwd, create_time
+    user_id, user_name, user_sex, user_phone, role_id, user_province, user_city, user_area, 
+     create_time
   </sql>
   <sql id="query_items_where">
   	<if test="userCity!=null">user_city=#{userCity}</if>
@@ -36,7 +36,7 @@
   </delete>
   <insert id="insert" parameterType="com.zbsjk.model.entity.UserInfo">
     insert into user_info (user_id, user_name, user_sex, 
-      user_phone, role_id, user__province, 
+      user_phone, role_id, user_province, 
       user_city, user_area, user_pwd, 
       create_time)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
@@ -63,7 +63,7 @@
         role_id,
       </if>
       <if test="userProvince != null">
-        user__province,
+        user_province,
       </if>
       <if test="userCity != null">
         user_city,
@@ -127,7 +127,7 @@
         role_id = #{roleId,jdbcType=INTEGER},
       </if>
       <if test="userProvince != null">
-        user__province = #{userProvince,jdbcType=VARCHAR},
+        user_province = #{userProvince,jdbcType=VARCHAR},
       </if>
       <if test="userCity != null">
         user_city = #{userCity,jdbcType=VARCHAR},
@@ -150,7 +150,7 @@
       user_sex = #{userSex,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=INTEGER},
-      user__province = #{userProvince,jdbcType=VARCHAR},
+      user_province = #{userProvince,jdbcType=VARCHAR},
       user_city = #{userCity,jdbcType=VARCHAR},
       user_area = #{userArea,jdbcType=VARCHAR},
       user_pwd = #{userPwd,jdbcType=VARCHAR},
@@ -159,7 +159,7 @@
   </update>
   
   <select id="queryUserList" resultMap="BaseResultMap" parameterType="map">
-    select user_id, user_name, user_sex, user_phone, role_id, user__province, user_city, user_area, create_time from user_info
+    select user_id, user_name, user_sex, user_phone, role_id, user_province, user_city, user_area, create_time from user_info
     <where>
     	<include refid="query_items_where"></include>
     </where>

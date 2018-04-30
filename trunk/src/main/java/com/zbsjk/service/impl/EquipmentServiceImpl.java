@@ -11,7 +11,6 @@ import com.github.pagehelper.PageInfo;
 import com.zbsjk.ext.ParamException;
 import com.zbsjk.model.dao.EquipmentInfoMapper;
 import com.zbsjk.model.entity.EquipmentInfo;
-import com.zbsjk.model.entity.UserInfo;
 import com.zbsjk.model.vo.EquipmentListVo;
 import com.zbsjk.service.EquipmentService;
 
@@ -37,8 +36,15 @@ public class EquipmentServiceImpl implements EquipmentService {
 	}
 
 	@Override
-	public Object queryEquipment(String equipmentNumber) {
-		return equipmentInfoMapper.selectByPrimaryKey(equipmentNumber);
+	public Object queryEquipment(String equipmentNumber,String userName) {
+		EquipmentListVo record = new EquipmentListVo();
+		record.setEquipmentNumber(equipmentNumber);
+		record.setUserName(userName);
+		List<EquipmentInfo> list = equipmentInfoMapper.queryByProperties(record);
+		if(list.size()!=1){
+			throw new ParamException("equipmentNumber", "信息不存在");
+		}
+		return list.get(0);
 	}
 
 	@Override

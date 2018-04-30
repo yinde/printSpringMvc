@@ -34,6 +34,10 @@ public class ExaminationServiceImpl implements ExaminationService {
 			throw new ParamException("equipmentNumber", "审核未通过或无记录");
 		}
 		
+		if(elist.get(0).getPayStatus().equals(0)){
+			throw new ParamException("user", "请先缴费！");
+		}
+		
 		List<ExaminationInfo> eifList = examinationInfoMapper.queryByProperties(examinationInfo);
 		if(eifList.size()>0){
 			return eifList.get(0);

@@ -87,7 +87,17 @@ public class EquipmentInfo {
     
     private String qrCodePath;
 
-    public String getQrCodePath() {
+    private Integer payStatus;
+    
+    public Integer getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(Integer payStatus) {
+		this.payStatus = payStatus;
+	}
+
+	public String getQrCodePath() {
 		return qrCodePath;
 	}
 
