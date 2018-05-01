@@ -10,13 +10,13 @@ import com.zbsjk.model.vo.EquipmentListVo;
 
 @Mapper
 public interface EquipmentInfoMapper {
-    int deleteByPrimaryKey(String equipmentNumber);
+    int deleteByPrimaryKey(Integer equipmentId);
 
     int insert(EquipmentInfo record);
 
     int insertSelective(EquipmentInfo record);
 
-    EquipmentInfo selectByPrimaryKey(String equipmentNumber);
+    EquipmentInfo selectByPrimaryKey(Integer equipmentId);
 
     int updateByPrimaryKeySelective(EquipmentInfo record);
 

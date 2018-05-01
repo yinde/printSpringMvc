@@ -26,7 +26,7 @@ public class GlobalExceptionHandler{
     @ExceptionHandler(SecurityException.class)  
     @ResponseBody  
     public ErrorInfo securityException(HttpServletRequest req,HttpServletResponse rsp,Exception e){  
-    	ParamException pe = (ParamException) e;
+    	SecurityException pe = (SecurityException) e;
     	rsp.setStatus(403);
     	ErrorInfo errInfo = new ErrorInfo();  
     	errInfo.setField(pe.getFiled());

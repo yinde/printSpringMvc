@@ -18,11 +18,11 @@
      create_time
   </sql>
   <sql id="query_items_where">
-  	<if test="userCity!=null">user_city=#{userCity}</if>
-	<if test="userArea!=null">user_area=#{userArea}</if>
-	<if test="userName!=null">user_name=#{userName}</if>
-	<if test="userPhone!=null">user_phone=#{userPhone}</if>
-	<if test="userPwd!=null">user_pwd=#{userPwd}</if>
+  	<if test="userCity!=null"> AND user_city=#{userCity}</if>
+	<if test="userArea!=null"> AND user_area=#{userArea}</if>
+	<if test="userName!=null"> AND user_name=#{userName}</if>
+	<if test="userPhone!=null"> AND user_phone=#{userPhone}</if>
+	<if test="userPwd!=null"> AND user_pwd=#{userPwd}</if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -45,11 +45,11 @@
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zbsjk.model.entity.UserInfo">
+     <selectKey keyProperty="userId" resultType="int">  
+            select LAST_INSERT_ID()  
+        </selectKey>  
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
       <if test="userName != null">
         user_name,
       </if>
@@ -79,9 +79,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>

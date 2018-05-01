@@ -3,6 +3,9 @@ package com.zbsjk.model.entity;
 import java.util.Date;
 
 public class EquipmentInfo {
+	
+	private Integer equipmentId;
+	
     private String equipmentNumber;
 
     private String registerNumber;
@@ -89,7 +92,15 @@ public class EquipmentInfo {
 
     private Integer payStatus;
     
-    public Integer getPayStatus() {
+    public Integer getEquipmentId() {
+		return equipmentId;
+	}
+
+	public void setEquipmentId(Integer equipmentId) {
+		this.equipmentId = equipmentId;
+	}
+
+	public Integer getPayStatus() {
 		return payStatus;
 	}
 

@@ -45,7 +45,7 @@
     <result column="rescue_status" jdbcType="TINYINT" property="rescueStatus" />
     <result column="qr_code_path" jdbcType="VARCHAR" property="qrCodePath" />
     <result column="pay_status" jdbcType="TINYINT" property="payStatus" />
-    
+    <result column="equipment_id" jdbcType="INTEGER" property="equipmentId" />
   </resultMap>
   <sql id="Base_Column_List">
     equipment_number, register_number, register_company, user_name, user_id_card, company_name, 
@@ -55,28 +55,28 @@
     insurance_agency, insurance_insurance, equipment_long, equipment_wide, equipment_hight, 
     purchase_method, fuel_variety, fuel_source, equipment_contaminants, noise_detection, 
     discharge_stage, exhaust_emission, purchase_time, qr_code, audit_status, audit_auditor, 
-    audit_time, create_time, rescue_status,qr_code_path,pay_status
+    audit_time, create_time, rescue_status,qr_code_path,pay_status,equipment_id
   </sql>
   <sql id="query_items_where">
-	<if test="userName!=null">user_name=#{userName}</if>
-	<if test="equipmentNumber!=null">equipment_number=#{equipmentNumber}</if>
-	<if test="auditStatus!=null">audit_status=#{auditStatus}</if>
-  	<if test="equipmentCity !=null">equipment_city=#{equipmentCity}</if>
-  	<if test="equipmentArea !=null">equipment_area=#{equipmentArea}</if>
-  	<if test="equipmentType !=null">equipment_type=#{equipmentType}</if>
-  	<if test="insuranceAgency !=null">insurance_agency LIKE CONCAT('%',#{insuranceAgency},'%')</if>
-  	<if test="startTime !=null">create_time &gt;=#{startTime}</if>
-  	<if test="endTime !=null">create_time &lt;=#{endTime}</if>
+	<if test="userName!=null"> AND user_name=#{userName}</if>
+	<if test="equipmentNumber!=null"> AND equipment_number=#{equipmentNumber}</if>
+	<if test="auditStatus!=null"> AND audit_status=#{auditStatus}</if>
+  	<if test="equipmentCity !=null"> AND equipment_city=#{equipmentCity}</if>
+  	<if test="equipmentArea !=null"> AND equipment_area=#{equipmentArea}</if>
+  	<if test="equipmentType !=null"> AND equipment_type=#{equipmentType}</if>
+  	<if test="insuranceAgency !=null"> AND insurance_agency LIKE CONCAT('%',#{insuranceAgency},'%')</if>
+  	<if test="startTime !=null"> AND create_time &gt;=#{startTime}</if>
+  	<if test="endTime !=null"> AND create_time &lt;=#{endTime}</if>
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from equipment_info
-    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+    where equipment_id = #{equipmentId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from equipment_info
-    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+    where equipment_id = #{equipmentId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zbsjk.model.entity.EquipmentInfo">
     insert into equipment_info (equipment_number, register_number, 
@@ -112,6 +112,9 @@
   </insert>
   <insert id="insertSelective" parameterType="com.zbsjk.model.entity.EquipmentInfo">
     insert into equipment_info
+    <selectKey keyProperty="equipmentId" resultType="int">  
+            select LAST_INSERT_ID()  
+        </selectKey>  
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="equipmentNumber != null">
         equipment_number,
@@ -505,7 +508,7 @@
         pay_status = #{payStatus,jdbcType=TINYINT},
       </if>
     </set>
-    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+    where equipment_id = #{equipmentId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zbsjk.model.entity.EquipmentInfo">
     update equipment_info
@@ -551,7 +554,7 @@
       rescue_status = #{rescueStatus,jdbcType=TINYINT},
       qr_code_path = #{qrCodePath,jdbcType=VARCHAR},
       pay_status = #{payStatus,jdbcType=VARCHAR}
-    where equipment_number = #{equipmentNumber,jdbcType=VARCHAR}
+    where equipment_id = #{equipmentId,jdbcType=INTEGER}
   </update>
   
 <select id="queryByProperties" resultMap="BaseResultMap" parameterType="map">

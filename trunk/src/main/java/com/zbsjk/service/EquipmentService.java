@@ -11,7 +11,7 @@ public interface EquipmentService {
 
 	Object queryEquipment(String equipmentNumber,String userName);
 
-	Object deleteEquipment(String equipmentNumber);
+	Object deleteEquipment(Integer equipmentId);
 
 	Object queryEquipmentList(EquipmentListVo equipmentListVo, Integer pageNo, Integer pageSize);
 

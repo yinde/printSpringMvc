@@ -9,8 +9,8 @@
     <result column="watch_time" jdbcType="VARCHAR" property="watchTime" />
   </resultMap>
   <sql id="query_items_where">
-	<if test="userName!=null">user_name=#{userName}</if>
-	<if test="equipmentNumber!=null">equipment_number=#{equipmentNumber}</if>
+	<if test="userName!=null"> AND user_name=#{userName}</if>
+	<if test="equipmentNumber!=null"> AND equipment_number=#{equipmentNumber}</if>
   </sql>
   <sql id="Base_Column_List">
     examination_id, examination_results, equipment_number, user_name, watch_time
@@ -34,6 +34,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zbsjk.model.entity.ExaminationInfo">
+   <selectKey keyProperty="examinationId" resultType="int">  
+            select LAST_INSERT_ID()  
+        </selectKey>  
     insert into examination_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="examinationId != null">

@@ -82,7 +82,7 @@ public class UserController {
 	
 	@RequestMapping(value ="/user/{userid}/resetpwd", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object resetpwd(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable Integer userId){
+			@PathVariable("userid") Integer userId){
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
@@ -92,7 +92,7 @@ public class UserController {
 	
 	@RequestMapping(value ="/user/{userid}/putpwd", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object putpwd(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable Integer userId,
+			@PathVariable("userid") Integer userId,
 			@RequestBody PutpwdVo putpwdVo){
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){

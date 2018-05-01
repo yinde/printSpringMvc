@@ -41,28 +41,28 @@ public class EquipmentContoller {
 		return equipmentService.addEquipment(equipmentInfo);
 	}
 	
-	@RequestMapping(value ="/equipment/{equipmentNumber}", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
+	@RequestMapping(value ="/equipment/{equipmentId}", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object updateEquipment(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String equipmentNumber,
+			@PathVariable("equipmentId") Integer equipmentId,
 			@RequestBody EquipmentInfo equipmentInfo){
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
 		}
-		equipmentInfo.setEquipmentNumber(equipmentNumber);
+		equipmentInfo.setEquipmentId(equipmentId);
 		return equipmentService.updateEquipment(equipmentInfo);
 	}
 	
 	@RequestMapping(value ="/equipment/equipmentInfo", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public Object queryEquipment(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam String equipmentNumber,
-			@RequestParam String userName){
+			@RequestParam(required=false) String equipmentNumber,
+			@RequestParam(required=false) String userName){
 		return equipmentService.queryEquipment(equipmentNumber,userName);
 	}
 	
-	@RequestMapping(value ="/equipment/{equipmentNumber}", method = RequestMethod.DELETE, produces = "application/json; charset=utf-8")
+	@RequestMapping(value ="/equipment/{equipmentId}", method = RequestMethod.DELETE, produces = "application/json; charset=utf-8")
 	public Object deleteEquipment(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String equipmentNumber){
+			@PathVariable("equipmentId") Integer equipmentId){
 		
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){
@@ -73,14 +73,14 @@ public class EquipmentContoller {
 			throw new SecurityException("user", "只有管理员能够删除");
 		}
 		
-		EquipmentInfo ei = equipmentInfoMapper.selectByPrimaryKey(equipmentNumber);
+		EquipmentInfo ei = equipmentInfoMapper.selectByPrimaryKey(equipmentId);
 		if(null==ei){
 			throw new ParamException("equipmentNumber", "设备不存在");
 		}
 		
 		String fileName = ei.getQrCode();
 		
-		int count = (int)equipmentService.deleteEquipment(equipmentNumber);
+		int count = (int)equipmentService.deleteEquipment(equipmentId);
 		
 		String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
 		
@@ -112,9 +112,9 @@ public class EquipmentContoller {
 		return equipmentService.queryEquipmentList(equipmentListVo,pageNo,pageSize);
 	}
 	
-	@RequestMapping(value ="/equipment/{equipmentNumber}/auditstatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
+	@RequestMapping(value ="/equipment/{equipmentId}/auditstatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object updateAuditstatus(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String equipmentNumber,
+			@PathVariable("equipmentId") Integer equipmentId,
 			@RequestBody EquipmentListVo equipmentListVo) throws Exception{
 		
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
@@ -129,13 +129,13 @@ public class EquipmentContoller {
 			throw new SecurityException("user", "只有管理员和审核员能审核");
 		}
 		
-		equipmentListVo.setEquipmentNumber(equipmentNumber);
+		equipmentListVo.setEquipmentId(equipmentId);
 		
 		String strBackUrl = "http://" + request.getServerName() + ":"
 				+ request.getServerPort()
 				+ request.getContextPath();
 				
-		String text=strBackUrl+"/equipment/"+equipmentNumber;
+		String text=strBackUrl+"/equipment/"+equipmentId;
 		String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
 		String s = QRCodeUtil.encode(text, path);
 		equipmentListVo.setQrCode(s);
@@ -143,29 +143,29 @@ public class EquipmentContoller {
 		return equipmentService.updateAuditstatus(equipmentListVo);
 	}
 	
-	@RequestMapping(value ="/equipment/{equipmentNumber}/rescuestatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
+	@RequestMapping(value ="/equipment/{equipmentId}/rescuestatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object updateRescuestatus(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String equipmentNumber,
+			@PathVariable("equipmentId") Integer equipmentId,
 			@RequestBody EquipmentListVo equipmentListVo) throws Exception{
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
 		}
 		
-		equipmentListVo.setEquipmentNumber(equipmentNumber);
+		equipmentListVo.setEquipmentId(equipmentId);
 		return equipmentService.updateAuditstatus(equipmentListVo);
 	}
 	
-	@RequestMapping(value ="/equipment/{equipmentNumber}/paystatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
+	@RequestMapping(value ="/equipment/{equipmentId}/paystatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object updatePayStatus(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String equipmentNumber,
+			@PathVariable("equipmentId") Integer equipmentId,
 			@RequestBody EquipmentListVo equipmentListVo) throws Exception{
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
 		}
 		
-		equipmentListVo.setEquipmentNumber(equipmentNumber);
+		equipmentListVo.setEquipmentId(equipmentId);
 		return equipmentService.updateAuditstatus(equipmentListVo);
 	}
 	

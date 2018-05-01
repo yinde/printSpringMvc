@@ -28,7 +28,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
 	@Override
 	public Object updateEquipment(EquipmentInfo equipmentInfo) {
-		EquipmentInfo ei = equipmentInfoMapper.selectByPrimaryKey(equipmentInfo.getEquipmentNumber());
+		EquipmentInfo ei = equipmentInfoMapper.selectByPrimaryKey(equipmentInfo.getEquipmentId());
 		if(null==ei || ei.getAuditStatus().equals(1)){
 			throw new ParamException("equipmentInfo", "信息不存在或审核已通过");
 		}
@@ -48,8 +48,8 @@ public class EquipmentServiceImpl implements EquipmentService {
 	}
 
 	@Override
-	public Object deleteEquipment(String equipmentNumber) {
-		return equipmentInfoMapper.deleteByPrimaryKey(equipmentNumber);
+	public Object deleteEquipment(Integer equipmentId) {
+		return equipmentInfoMapper.deleteByPrimaryKey(equipmentId);
 	}
 
 	@Override
