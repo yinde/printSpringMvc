@@ -51,14 +51,8 @@ public class LoginController {
 		List<Integer> list = new ArrayList<>();
 		switch (user.getRoleId()) {
 		case 1:  //超级管理员
-			list.add(2);
-			list.add(3);
-			list.add(4);
-			list.add(5);
-			list.add(6);
-			list.add(7);
-			break;
 		case 2:	//市管理员
+			list.add(2);
 			list.add(3);
 			list.add(4);
 			list.add(5);

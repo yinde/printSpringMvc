@@ -92,7 +92,17 @@ public class EquipmentInfo {
 
     private Integer payStatus;
     
-    public Integer getEquipmentId() {
+    private String fuelConsumption;
+    
+    public String getFuelConsumption() {
+		return fuelConsumption;
+	}
+
+	public void setFuelConsumption(String fuelConsumption) {
+		this.fuelConsumption = fuelConsumption;
+	}
+
+	public Integer getEquipmentId() {
 		return equipmentId;
 	}
 

@@ -46,6 +46,8 @@
     <result column="qr_code_path" jdbcType="VARCHAR" property="qrCodePath" />
     <result column="pay_status" jdbcType="TINYINT" property="payStatus" />
     <result column="equipment_id" jdbcType="INTEGER" property="equipmentId" />
+    <result column="fuel_consumption" jdbcType="VARCHAR" property="fuelConsumption" />
+  	
   </resultMap>
   <sql id="Base_Column_List">
     equipment_number, register_number, register_company, user_name, user_id_card, company_name, 
@@ -55,7 +57,7 @@
     insurance_agency, insurance_insurance, equipment_long, equipment_wide, equipment_hight, 
     purchase_method, fuel_variety, fuel_source, equipment_contaminants, noise_detection, 
     discharge_stage, exhaust_emission, purchase_time, qr_code, audit_status, audit_auditor, 
-    audit_time, create_time, rescue_status,qr_code_path,pay_status,equipment_id
+    audit_time, create_time, rescue_status,qr_code_path,pay_status,equipment_id,fuel_consumption
   </sql>
   <sql id="query_items_where">
 	<if test="userName!=null"> AND user_name=#{userName}</if>
@@ -92,7 +94,7 @@
       fuel_source, equipment_contaminants, noise_detection, 
       discharge_stage, exhaust_emission, purchase_time, 
       qr_code, audit_status, audit_auditor, 
-      audit_time, create_time, rescue_status,qr_code_path,pay_status
+      audit_time, create_time, rescue_status,qr_code_path,pay_status,fuel_consumption
       )
     values (#{equipmentNumber,jdbcType=VARCHAR}, #{registerNumber,jdbcType=VARCHAR}, 
       #{registerCompany,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userIdCard,jdbcType=VARCHAR}, 
@@ -108,7 +110,7 @@
       #{dischargeStage,jdbcType=VARCHAR}, #{exhaustEmission,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP}, 
       #{qrCode,jdbcType=VARCHAR}, #{auditStatus,jdbcType=TINYINT}, #{auditAuditor,jdbcType=INTEGER}, 
       #{auditTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{rescueStatus,jdbcType=TINYINT},#{qrCodePath,jdbcType=VARCHAR}
-      #{payStatus,jdbcType=VARCHAR})
+      #{payStatus,jdbcType=TINYINT}), #{fuelConsumption,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zbsjk.model.entity.EquipmentInfo">
     insert into equipment_info
@@ -245,6 +247,9 @@
        <if test="payStatus != null">
         pay_status,
       </if>
+      <if test="fuelConsumption != null">
+        fuel_consumption,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="equipmentNumber != null">
@@ -374,7 +379,10 @@
         #{qrCodePath,jdbcType=VARCHAR},
       </if>
       <if test="payStatus != null">
-        #{payStatus,jdbcType=VARCHAR},
+        #{payStatus,jdbcType=TINYINT},
+      </if>
+      <if test="fuelConsumption != null">
+        #{fuelConsumption,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -507,6 +515,9 @@
       <if test="payStatus != null">
         pay_status = #{payStatus,jdbcType=TINYINT},
       </if>
+      <if test="fuelConsumption != null">
+        fuel_consumption = #{fuelConsumption,jdbcType=VARCHAR},
+      </if>
     </set>
     where equipment_id = #{equipmentId,jdbcType=INTEGER}
   </update>
@@ -553,7 +564,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       rescue_status = #{rescueStatus,jdbcType=TINYINT},
       qr_code_path = #{qrCodePath,jdbcType=VARCHAR},
-      pay_status = #{payStatus,jdbcType=VARCHAR}
+      pay_status = #{payStatus,jdbcType=TINYINT},
+      fuel_consumption = #{fuelConsumption,jdbcType=VARCHAR}
     where equipment_id = #{equipmentId,jdbcType=INTEGER}
   </update>
   
