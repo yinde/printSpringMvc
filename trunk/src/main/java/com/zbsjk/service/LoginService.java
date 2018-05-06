@@ -8,6 +8,6 @@ public interface LoginService {
 
 	Object login(PutpwdVo putpwdVo);
 
-	Object getRoleList(Integer pageNo, Integer pageSize,List<Integer> list);
+	Object getRoleList(List<Integer> list);
 
 }

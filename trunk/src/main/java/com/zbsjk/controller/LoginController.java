@@ -1,4 +1,4 @@
-package com.zbsjk.controller;
+﻿package com.zbsjk.controller;
 
 
 
@@ -40,9 +40,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value ="/role", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public Object getRoleList(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam Integer pageNo,
-			@RequestParam Integer pageSize){
+	public Object getRoleList(HttpServletRequest request, HttpServletResponse response){
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
@@ -66,6 +64,6 @@ public class LoginController {
 		default:
 			break;
 		}
-		return loginService.getRoleList(pageNo,pageSize,list);
+		return loginService.getRoleList(list);
 	}
 }

@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public Object getRoleList(Integer pageNo, Integer pageSize,List<Integer> roleIdlist) {
+	public Object getRoleList(List<Integer> roleIdlist) {
 		List<RoleInfo> list = roleInfoMapper.queryRoleList(roleIdlist);
 		return list;
 	}
