@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	public Object addUser(UserInfo userInfo) {
 		UserInfo userInfoData = new UserInfo();
 		userInfoData.setUserPhone(userInfo.getUserPhone());
-		List<UserInfo> list = userInfoMapper.queryUserList(userInfo);
+		List<UserInfo> list = userInfoMapper.queryUserList(userInfoData);
 		if(list.size()>0){
 			throw new ParamException("userid", "账号已存在");
 		}
