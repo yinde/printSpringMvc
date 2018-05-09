@@ -23,4 +23,6 @@ public interface EquipmentInfoMapper {
     int updateByPrimaryKey(EquipmentInfo record);
 
 	List<EquipmentInfo> queryByProperties(EquipmentListVo record);
+
+	int checkEquipmentInfo(EquipmentListVo record);
 }

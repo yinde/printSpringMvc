@@ -28,7 +28,9 @@ public class UserServiceImpl implements UserService {
 		if(list.size()>0){
 			throw new ParamException("userid", "账号已存在");
 		}
-		
+		if(userInfo.getUserCity() == null || userInfo.getUserArea() == null){
+			throw new ParamException("userid", "市或区都不能为空");
+		}
 		userInfo.setUserProvince("湖南省");
 		userInfo.setCreateTime(new Date());
 		userInfoMapper.insertSelective(userInfo);

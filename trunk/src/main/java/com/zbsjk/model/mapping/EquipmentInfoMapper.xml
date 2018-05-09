@@ -575,4 +575,13 @@
 		<include refid="query_items_where"></include>
 	</where>
 </select>
+
+<select id="checkEquipmentInfo" resultType="int" parameterType="map">
+	select count(0) from equipment_info
+	<where>
+		<if test="equipmentNumber!=null"> OR equipment_number=#{equipmentNumber}</if>
+		<if test="registerNumber !=null"> OR register_number=#{registerNumber}</if>
+	</where>
+</select>
+
 </mapper>

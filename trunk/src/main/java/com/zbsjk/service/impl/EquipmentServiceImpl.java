@@ -24,9 +24,10 @@ public class EquipmentServiceImpl implements EquipmentService {
 	public Object addEquipment(EquipmentInfo equipmentInfo) {
 		EquipmentListVo record = new EquipmentListVo();
 		record.setEquipmentNumber(equipmentInfo.getEquipmentNumber());
-		List<EquipmentInfo> list = equipmentInfoMapper.queryByProperties(record);
-		if(list.size()!=0){
-			throw new ParamException("equipmentNumber", "信息已存在");
+		record.setRegisterNumber(equipmentInfo.getRegisterNumber());
+		int count  = equipmentInfoMapper.checkEquipmentInfo(record);
+		if(count!=0){
+			throw new ParamException("equipmentNumber", "设备编号或登录编号已存在");
 		}
 		
 		equipmentInfo.setCreateTime(new Date());
