@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.zbsjk.model.entity.EquipmentInfo;
 import com.zbsjk.model.vo.EquipmentListVo;
@@ -25,4 +26,6 @@ public interface EquipmentInfoMapper {
 	List<EquipmentInfo> queryByProperties(EquipmentListVo record);
 
 	int checkEquipmentInfo(EquipmentListVo record);
+
+	int insertBackInfo(@Param("equipmentId")Integer equipmentId,@Param("operationUser")Integer operationUser);
 }

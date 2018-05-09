@@ -20,8 +20,8 @@
   <sql id="query_items_where">
   	<if test="userCity!=null"> AND user_city=#{userCity}</if>
 	<if test="userArea!=null"> AND user_area=#{userArea}</if>
-	<if test="userName!=null"> AND user_name=#{userName}</if>
-	<if test="userPhone!=null"> AND user_phone=#{userPhone}</if>
+	<if test="userName!=null"> AND user_name LIKE CONCAT('%',#{userName},'%')</if>
+	<if test="userPhone!=null"> AND user_phone LIKE CONCAT('%',#{userPhone},'%')</if>
 	<if test="userPwd!=null"> AND user_pwd=#{userPwd}</if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -161,4 +161,8 @@
     	<include refid="query_items_where"></include>
     </where>
   </select>
+  
+  <insert id="insertBackInfo" parameterType="java.lang.Integer">
+  	insert into user_info_delete_info select *,#{operationUser,jdbcType=INTEGER},now() from user_info where user_id = #{userId,jdbcType=INTEGER}
+  </insert>
 </mapper>

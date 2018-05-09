@@ -56,8 +56,9 @@ public class EquipmentServiceImpl implements EquipmentService {
 	}
 
 	@Override
-	public Object deleteEquipment(Integer equipmentId) {
-		return equipmentInfoMapper.deleteByPrimaryKey(equipmentId);
+	public Object deleteEquipment(Integer equipmentId,Integer operationUser) {
+		equipmentInfoMapper.deleteByPrimaryKey(equipmentId);
+		return equipmentInfoMapper.insertBackInfo(equipmentId,operationUser);
 	}
 
 	@Override
@@ -69,8 +70,8 @@ public class EquipmentServiceImpl implements EquipmentService {
 	}
 
 	@Override
-	public Object updateAuditstatus(EquipmentListVo equipmentListVo) {
-		return equipmentInfoMapper.updateByPrimaryKeySelective(equipmentListVo);
+	public int updateByPrimaryKeySelective(EquipmentInfo equipmentInfo) {
+		return equipmentInfoMapper.updateByPrimaryKeySelective(equipmentInfo);
 	}
 
 }

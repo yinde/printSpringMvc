@@ -47,6 +47,7 @@
     <result column="pay_status" jdbcType="TINYINT" property="payStatus" />
     <result column="equipment_id" jdbcType="INTEGER" property="equipmentId" />
     <result column="fuel_consumption" jdbcType="VARCHAR" property="fuelConsumption" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
   	
   </resultMap>
   <sql id="Base_Column_List">
@@ -57,10 +58,10 @@
     insurance_agency, insurance_insurance, equipment_long, equipment_wide, equipment_hight, 
     purchase_method, fuel_variety, fuel_source, equipment_contaminants, noise_detection, 
     discharge_stage, exhaust_emission, purchase_time, qr_code, audit_status, audit_auditor, 
-    audit_time, create_time, rescue_status,qr_code_path,pay_status,equipment_id,fuel_consumption
+    audit_time, create_time, rescue_status,qr_code_path,pay_status,equipment_id,fuel_consumption,create_user
   </sql>
   <sql id="query_items_where">
-	<if test="userName!=null"> AND user_name=#{userName}</if>
+	<if test="userName!=null"> AND user_name LIKE CONCAT('%',#{userName},'%')</if>
 	<if test="equipmentNumber!=null"> AND equipment_number=#{equipmentNumber}</if>
 	<if test="auditStatus!=null"> AND audit_status=#{auditStatus}</if>
   	<if test="equipmentCity !=null"> AND equipment_city=#{equipmentCity}</if>
@@ -69,6 +70,8 @@
   	<if test="insuranceAgency !=null"> AND insurance_agency LIKE CONCAT('%',#{insuranceAgency},'%')</if>
   	<if test="startTime !=null"> AND create_time &gt;=#{startTime}</if>
   	<if test="endTime !=null"> AND create_time &lt;=#{endTime}</if>
+  	<if test="noiseDetection !=null"> AND noise_detection =#{noiseDetection}</if>
+  	
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -95,7 +98,7 @@
       discharge_stage, exhaust_emission, purchase_time, 
       qr_code, audit_status, audit_auditor, 
       audit_time, create_time, rescue_status,qr_code_path,pay_status,fuel_consumption
-      )
+      ,create_user)
     values (#{equipmentNumber,jdbcType=VARCHAR}, #{registerNumber,jdbcType=VARCHAR}, 
       #{registerCompany,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userIdCard,jdbcType=VARCHAR}, 
       #{companyName,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, 
@@ -110,7 +113,7 @@
       #{dischargeStage,jdbcType=VARCHAR}, #{exhaustEmission,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP}, 
       #{qrCode,jdbcType=VARCHAR}, #{auditStatus,jdbcType=TINYINT}, #{auditAuditor,jdbcType=INTEGER}, 
       #{auditTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{rescueStatus,jdbcType=TINYINT},#{qrCodePath,jdbcType=VARCHAR}
-      #{payStatus,jdbcType=TINYINT}), #{fuelConsumption,jdbcType=VARCHAR})
+      #{payStatus,jdbcType=TINYINT}), #{fuelConsumption,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zbsjk.model.entity.EquipmentInfo">
     insert into equipment_info
@@ -250,6 +253,9 @@
       <if test="fuelConsumption != null">
         fuel_consumption,
       </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="equipmentNumber != null">
@@ -383,6 +389,9 @@
       </if>
       <if test="fuelConsumption != null">
         #{fuelConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -584,4 +593,7 @@
 	</where>
 </select>
 
+<insert id="insertBackInfo" parameterType="java.lang.Integer">
+	insert into equipment_info_delete_info select *,#{operationUser,jdbcType=INTEGER},now() from equipment_info where equipment_id = #{equipmentId,jdbcType=INTEGER}
+</insert>
 </mapper>

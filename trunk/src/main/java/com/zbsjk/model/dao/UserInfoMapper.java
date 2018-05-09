@@ -3,6 +3,7 @@ package com.zbsjk.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.zbsjk.model.entity.UserInfo;
 
@@ -21,4 +22,6 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
 	List<UserInfo> queryUserList(UserInfo userInfo);
+
+	Object insertBackInfo(@Param("userId")Integer userId, @Param("operationUser")Integer operationUser);
 }

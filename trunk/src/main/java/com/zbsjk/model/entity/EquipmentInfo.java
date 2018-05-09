@@ -94,7 +94,17 @@ public class EquipmentInfo {
     
     private String fuelConsumption;
     
-    public String getFuelConsumption() {
+    private Integer createUser;
+    
+    public Integer getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(Integer createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getFuelConsumption() {
 		return fuelConsumption;
 	}
 

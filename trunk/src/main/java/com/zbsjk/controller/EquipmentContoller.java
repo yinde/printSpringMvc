@@ -1,6 +1,7 @@
 package com.zbsjk.controller;
 
 import java.io.File;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,12 +34,31 @@ public class EquipmentContoller {
 	
 	@RequestMapping(value ="/equipment", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public Object addEquipment(HttpServletRequest request, HttpServletResponse response,
-			@RequestBody EquipmentInfo equipmentInfo){
+			@RequestBody EquipmentInfo equipmentInfo) throws Exception{
 		UserInfo user = (UserInfo)request.getSession().getAttribute("user");
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
 		}
-		return equipmentService.addEquipment(equipmentInfo);
+		equipmentInfo.setCreateUser(user.getUserId());
+		Object object = equipmentService.addEquipment(equipmentInfo);
+		
+		if(equipmentInfo.getRescueStatus().equals(1)){
+			//新增应急设备
+			String strBackUrl = "http://" + request.getServerName() + ":"
+					+ request.getServerPort()
+					+ request.getContextPath();
+					
+			String text=strBackUrl+"/jsp/sjk/qrcode.html?equipmentNumber="+equipmentInfo.getEquipmentNumber()+"&userName="+equipmentInfo.getUserName();
+			String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
+			String s = QRCodeUtil.encode(text, path);
+			equipmentInfo.setQrCode(s);
+			equipmentInfo.setQrCodePath(strBackUrl+"/Report/"+s);
+			equipmentInfo.setAuditStatus(1);
+			equipmentInfo.setPayStatus(1);
+			equipmentInfo.setRescueStatus(1);
+			equipmentService.updateByPrimaryKeySelective(equipmentInfo);
+		}
+		return object;
 	}
 	
 	@RequestMapping(value ="/equipment/{equipmentId}", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
@@ -80,7 +100,7 @@ public class EquipmentContoller {
 		
 		String fileName = ei.getQrCode();
 		
-		int count = (int)equipmentService.deleteEquipment(equipmentId);
+		int count = (int)equipmentService.deleteEquipment(equipmentId,user.getUserId());
 		
 		String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
 		
@@ -112,6 +132,15 @@ public class EquipmentContoller {
 		return equipmentService.queryEquipmentList(equipmentListVo,pageNo,pageSize);
 	}
 	
+	/**
+	 * 修改审核状态接口
+	 * @param request
+	 * @param response
+	 * @param equipmentId
+	 * @param equipmentListVo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value ="/equipment/{equipmentId}/auditstatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object updateAuditstatus(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("equipmentId") Integer equipmentId,
@@ -129,7 +158,10 @@ public class EquipmentContoller {
 			throw new SecurityException("user", "只有管理员和审核员能审核");
 		}
 		
-		equipmentListVo.setEquipmentId(equipmentId);
+		EquipmentInfo equipmentInfo = new EquipmentInfo();
+		
+		equipmentInfo.setEquipmentId(equipmentId);
+		equipmentInfo.setAuditStatus(equipmentListVo.getAuditStatus());
 		
 		String strBackUrl = "http://" + request.getServerName() + ":"
 				+ request.getServerPort()
@@ -138,11 +170,22 @@ public class EquipmentContoller {
 		String text=strBackUrl+"/equipment/"+equipmentId;
 		String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
 		String s = QRCodeUtil.encode(text, path);
-		equipmentListVo.setQrCode(s);
-		equipmentListVo.setQrCodePath(strBackUrl+"/Report/"+s);
-		return equipmentService.updateAuditstatus(equipmentListVo);
+		equipmentInfo.setQrCode(s);
+		equipmentInfo.setQrCodePath(strBackUrl+"/Report/"+s);
+		equipmentInfo.setAuditAuditor(user.getUserId());
+		equipmentInfo.setAuditTime(new Date());
+		return equipmentService.updateByPrimaryKeySelective(equipmentInfo);
 	}
 	
+	/**
+	 * 设置应急状态接口
+	 * @param request
+	 * @param response
+	 * @param equipmentId
+	 * @param equipmentListVo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value ="/equipment/{equipmentId}/rescuestatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object updateRescuestatus(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("equipmentId") Integer equipmentId,
@@ -152,10 +195,22 @@ public class EquipmentContoller {
 			throw new SecurityException("user", "请先登录");
 		}
 		
-		equipmentListVo.setEquipmentId(equipmentId);
-		return equipmentService.updateAuditstatus(equipmentListVo);
+		EquipmentInfo equipmentInfo = new EquipmentInfo();
+		equipmentInfo.setEquipmentId(equipmentId);
+		equipmentInfo.setRescueStatus(equipmentListVo.getRescueStatus());
+		
+		return equipmentService.updateByPrimaryKeySelective(equipmentInfo);
 	}
 	
+	/**
+	 * 设置缴费状态接口
+	 * @param request
+	 * @param response
+	 * @param equipmentId
+	 * @param equipmentListVo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value ="/equipment/{equipmentId}/paystatus", method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public Object updatePayStatus(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("equipmentId") Integer equipmentId,
@@ -164,9 +219,11 @@ public class EquipmentContoller {
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
 		}
+		EquipmentInfo equipmentInfo = new EquipmentInfo();
+		equipmentInfo.setEquipmentId(equipmentId);
+		equipmentInfo.setRescueStatus(equipmentListVo.getPayStatus());
 		
-		equipmentListVo.setEquipmentId(equipmentId);
-		return equipmentService.updateAuditstatus(equipmentListVo);
+		return equipmentService.updateByPrimaryKeySelective(equipmentInfo);
 	}
 	
 }

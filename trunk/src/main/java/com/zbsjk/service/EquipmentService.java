@@ -11,10 +11,10 @@ public interface EquipmentService {
 
 	Object queryEquipment(String equipmentNumber,String userName);
 
-	Object deleteEquipment(Integer equipmentId);
+	Object deleteEquipment(Integer equipmentId,Integer operationUser);
 
 	Object queryEquipmentList(EquipmentListVo equipmentListVo, Integer pageNo, Integer pageSize);
 
-	Object updateAuditstatus(EquipmentListVo equipmentListVo);
+	int updateByPrimaryKeySelective(EquipmentInfo equipmentInfo);
 
 }

@@ -54,7 +54,7 @@ public class UserController {
 		if(null==user){
 			throw new SecurityException("user", "请先登录");
 		}
-		return userService.deleteUser(userId);
+		return userService.deleteUser(userId,user.getUserId());
 	}
 	
 	@RequestMapping(value ="/user", method = RequestMethod.GET, produces = "application/json; charset=utf-8")

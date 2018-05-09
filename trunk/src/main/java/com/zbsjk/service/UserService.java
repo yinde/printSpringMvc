@@ -9,7 +9,7 @@ public interface UserService {
 
 	Object updateUser(UserInfo userInfo);
 
-	Object deleteUser(Integer userId);
+	Object deleteUser(Integer userId,Integer operationUser);
 
 	Object getUserList(UserInfo userInfo, Integer pageNo, Integer pageSize);
 
