@@ -37,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Object updateUser(UserInfo userInfo) {
+		if(null!=userInfo.getUserPhone()){
+			throw new ParamException("userphone", "手机号不能修改");
+		}
 		userInfoMapper.updateByPrimaryKeySelective(userInfo);
 		return userInfo;
 	}
