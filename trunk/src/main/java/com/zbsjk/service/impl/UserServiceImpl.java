@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
 	public Object addUser(UserInfo userInfo) {
 		UserInfo userInfoData = new UserInfo();
 		userInfoData.setUserPhone(userInfo.getUserPhone());
-		List<UserInfo> list = userInfoMapper.queryUserList(userInfoData);
-		if(list.size()>0){
+		int count = userInfoMapper.queryUserCount(userInfoData);
+		if(count>0){
 			throw new ParamException("userid", "账号已存在");
 		}
 		userInfo.setUserProvince("湖南省");
@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService {
 		UserInfo userInfo = new UserInfo();
 		userInfo.setUserPwd(putpwdVo.getOldpwd());
 		userInfo.setUserPhone(putpwdVo.getAccount());
-		List<UserInfo> list = userInfoMapper.queryUserList(userInfo);
-		if(list.size()==0){
+		int count = userInfoMapper.queryUserCount(userInfo);
+		if(count==0){
 			throw new ParamException("account", "原始密码不正确");
 		}
 		

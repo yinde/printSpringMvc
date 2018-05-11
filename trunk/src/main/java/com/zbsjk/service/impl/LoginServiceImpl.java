@@ -27,11 +27,11 @@ public class LoginServiceImpl implements LoginService {
 		UserInfo userInfo = new UserInfo();
 		userInfo.setUserPhone(putpwdVo.getAccount());
 		userInfo.setUserPwd(putpwdVo.getPwd());
-		List<UserInfo> list = userInfoMapper.queryUserList(userInfo);
-		if(list.size()==0){
+		UserInfo data  = userInfoMapper.queryUser(userInfo);
+		if(null==data){
 			throw new ParamException("account", "账号密码不正确");
 		}
-		return list.get(0);
+		return data;
 	}
 
 	@Override

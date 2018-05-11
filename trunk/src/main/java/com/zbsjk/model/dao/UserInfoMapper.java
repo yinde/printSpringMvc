@@ -22,6 +22,10 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
 	List<UserInfo> queryUserList(UserInfo userInfo);
+	
+	UserInfo queryUser(UserInfo userInfo);
+	
+	int queryUserCount(UserInfo userInfo);
 
 	Object insertBackInfo(@Param("userId")Integer userId, @Param("operationUser")Integer operationUser);
 }

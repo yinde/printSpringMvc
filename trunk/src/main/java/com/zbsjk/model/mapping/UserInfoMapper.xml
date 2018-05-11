@@ -158,6 +158,7 @@
   <select id="queryUserList" resultMap="BaseResultMap" parameterType="map">
     select user_id, user_name, user_sex, user_phone, role_id, user_province, user_city, user_area, create_time from user_info
     <where>
+         role_id != 1
     	<include refid="query_items_where"></include>
     </where>
   </select>
@@ -165,4 +166,18 @@
   <insert id="insertBackInfo" parameterType="java.lang.Integer">
   	insert into user_info_delete_info select *,#{operationUser,jdbcType=INTEGER},now() from user_info where user_id = #{userId,jdbcType=INTEGER}
   </insert>
+  
+  <select id="queryUserCount" resultType="int" parameterType="map">
+    select count(0) from user_info
+    <where>
+    	<include refid="query_items_where"></include>
+    </where>
+  </select>
+  
+  <select id="queryUser" resultMap="BaseResultMap" parameterType="map">
+    select user_id, user_name, user_sex, user_phone, role_id, user_province, user_city, user_area, create_time from user_info
+    <where>
+    	<include refid="query_items_where"></include>
+    </where>
+  </select>
 </mapper>
