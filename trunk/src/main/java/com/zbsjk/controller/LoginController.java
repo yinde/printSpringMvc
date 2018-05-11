@@ -58,6 +58,7 @@ public class LoginController {
 			list.add(7);
 			break;
 		case 3:	//区管理员
+			list.add(3);
 			list.add(5);
 			list.add(7);
 			break;

@@ -57,8 +57,8 @@ public class EquipmentServiceImpl implements EquipmentService {
 
 	@Override
 	public Object deleteEquipment(Integer equipmentId,Integer operationUser) {
-		equipmentInfoMapper.deleteByPrimaryKey(equipmentId);
-		return equipmentInfoMapper.insertBackInfo(equipmentId,operationUser);
+		equipmentInfoMapper.insertBackInfo(equipmentId,operationUser);
+		return equipmentInfoMapper.deleteByPrimaryKey(equipmentId);
 	}
 
 	@Override
