@@ -221,7 +221,7 @@ public class EquipmentContoller {
 		}
 		EquipmentInfo equipmentInfo = new EquipmentInfo();
 		equipmentInfo.setEquipmentId(equipmentId);
-		equipmentInfo.setRescueStatus(equipmentListVo.getPayStatus());
+		equipmentInfo.setPayStatus(equipmentListVo.getPayStatus());
 		
 		return equipmentService.updateByPrimaryKeySelective(equipmentInfo);
 	}
