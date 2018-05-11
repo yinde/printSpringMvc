@@ -177,7 +177,11 @@
   <select id="queryUser" resultMap="BaseResultMap" parameterType="map">
     select user_id, user_name, user_sex, user_phone, role_id, user_province, user_city, user_area, create_time from user_info
     <where>
-    	<include refid="query_items_where"></include>
+    <if test="userCity!=null"> AND user_city=#{userCity}</if>
+	<if test="userArea!=null"> AND user_area=#{userArea}</if>
+	<if test="userName!=null"> AND user_name LIKE CONCAT('%',#{userName},'%')</if>
+	<if test="userPhone!=null"> AND user_phone = #{userPhone}</if>
+	<if test="userPwd!=null"> AND user_pwd=#{userPwd}</if>
     </where>
   </select>
 </mapper>
