@@ -25,7 +25,7 @@ public interface UserInfoMapper {
 	
 	UserInfo queryUser(UserInfo userInfo);
 	
-	int queryUserCount(UserInfo userInfo);
+	int selUserCount(UserInfo userInfo);
 
 	Object insertBackInfo(@Param("userId")Integer userId, @Param("operationUser")Integer operationUser);
 }

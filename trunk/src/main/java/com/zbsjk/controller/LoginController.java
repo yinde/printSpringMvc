@@ -31,7 +31,7 @@ public class LoginController {
 			@RequestBody PutpwdVo putpwdVo){
 		UserInfo user = (UserInfo)loginService.login(putpwdVo);
 		if(putpwdVo.getLoginType().equals("yingji")){
-			if(!user.getRoleId().equals(1)&&!user.getRoleId().equals(2)&&!user.getRoleId().equals(4)){
+			if(!user.getRoleId().equals(1)&&!user.getRoleId().equals(2)&&!user.getRoleId().equals(3)){
 				throw new SecurityException("user", "无登录权限");
 			}
 		}

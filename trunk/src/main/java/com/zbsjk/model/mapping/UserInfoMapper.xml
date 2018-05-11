@@ -167,8 +167,8 @@
   	insert into user_info_delete_info select *,#{operationUser,jdbcType=INTEGER},now() from user_info where user_id = #{userId,jdbcType=INTEGER}
   </insert>
   
-  <select id="queryUserCount" resultType="int" parameterType="map">
-    select count(0) from user_info
+  <select id="selUserCount" resultType="java.lang.Integer" parameterType="map">
+    select count(1) from user_info
     <where>
     	<include refid="query_items_where"></include>
     </where>
