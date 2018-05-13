@@ -164,11 +164,12 @@ public class EquipmentContoller {
 		equipmentInfo.setEquipmentId(equipmentId);
 		equipmentInfo.setAuditStatus(equipmentListVo.getAuditStatus());
 		
+		EquipmentInfo ei = equipmentService.selectByPrimaryKey(equipmentId);
+		
 		String strBackUrl = "http://" + request.getServerName() + ":"
 				+ request.getServerPort()
 				+ request.getContextPath();
-				
-		String text=strBackUrl+"/equipment/"+equipmentId;
+		String text=strBackUrl+"/jsp/sjk/qrcode.html?equipmentNumber="+ei.getEquipmentNumber()+"&userName="+ei.getUserName();
 		String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
 		String s = QRCodeUtil.encode(text, path);
 		equipmentInfo.setQrCode(s);

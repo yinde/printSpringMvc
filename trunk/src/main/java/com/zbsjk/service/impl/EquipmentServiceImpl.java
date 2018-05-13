@@ -74,4 +74,8 @@ public class EquipmentServiceImpl implements EquipmentService {
 		return equipmentInfoMapper.updateByPrimaryKeySelective(equipmentInfo);
 	}
 
+	@Override
+	public EquipmentInfo selectByPrimaryKey(Integer equipmentId) {
+		return equipmentInfoMapper.selectByPrimaryKey(equipmentId);
+	}
 }

@@ -72,6 +72,7 @@
   	<if test="endTime !=null"> AND create_time &lt;=#{endTime}</if>
   	<if test="noiseDetection !=null"> AND noise_detection =#{noiseDetection}</if>
   	<if test="rescueStatus !=null"> AND rescue_status =#{rescueStatus}</if>
+  	<if test="userNameNoLike !=null"> AND user_name =#{userNameNoLike}</if>
   	
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

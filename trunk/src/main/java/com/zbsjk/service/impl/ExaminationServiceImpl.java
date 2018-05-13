@@ -26,7 +26,7 @@ public class ExaminationServiceImpl implements ExaminationService {
 	public Object addExamination(ExaminationInfo examinationInfo) {
 		//验证是否有记录或者审核通过
 		EquipmentListVo ei = new EquipmentListVo();
-		ei.setUserName(examinationInfo.getUserName());
+		ei.setUserNameNoLike(examinationInfo.getUserName());
 		ei.setEngineNumber(examinationInfo.getEquipmentNumber());
 		ei.setAuditStatus(1);
 		List<EquipmentInfo> elist = equipmentInfoMapper.queryByProperties(ei);
