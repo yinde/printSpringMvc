@@ -1,5 +1,8 @@
 package com.zbsjk.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.zbsjk.model.entity.EquipmentInfo;
 import com.zbsjk.model.vo.EquipmentListVo;
 
@@ -18,5 +21,7 @@ public interface EquipmentService {
 	int updateByPrimaryKeySelective(EquipmentInfo equipmentInfo);
 
 	EquipmentInfo selectByPrimaryKey(Integer equipmentId);
+
+	List<Map<String, Object>> createExcelRecord(List<EquipmentInfo> equipmentList);
 
 }
