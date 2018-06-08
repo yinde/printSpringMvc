@@ -278,7 +278,8 @@ public class QRCodeUtil {
     }  
   
     public static void main(String[] args) throws Exception {  
-        String text = "https://www.baidu.com/";  
-        QRCodeUtil.encode(text, "e:/1");  
+        String text = "https://www.baidu.com/"; 
+        
+        QRCodeUtil.encode(text, "e:/1/1.png", "e:/1",true);  
     }  
 }  

@@ -181,7 +181,8 @@ public class EquipmentContoller {
 				+ request.getContextPath();
 		String text=strBackUrl+"/jsp/sjk/qrcode.html?equipmentNumber="+ei.getEquipmentNumber()+"&userName="+ei.getUserName();
 		String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
-		String s = QRCodeUtil.encode(text, path);
+		String logoPath = request.getSession().getServletContext().getRealPath("/")+"jsp/1.png";
+		String s = QRCodeUtil.encode(text, logoPath,path,true);
 		equipmentInfo.setQrCode(s);
 		equipmentInfo.setQrCodePath(strBackUrl+"/Report/"+s);
 		equipmentInfo.setAuditAuditor(user.getUserId());
