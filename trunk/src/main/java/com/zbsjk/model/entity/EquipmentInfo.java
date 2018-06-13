@@ -96,7 +96,27 @@ public class EquipmentInfo {
     
     private Integer createUser;
     
-    public Integer getCreateUser() {
+    private String equipmentPic;
+    
+    private String billPic;
+    
+    public String getEquipmentPic() {
+		return equipmentPic;
+	}
+
+	public void setEquipmentPic(String equipmentPic) {
+		this.equipmentPic = equipmentPic;
+	}
+
+	public String getBillPic() {
+		return billPic;
+	}
+
+	public void setBillPic(String billPic) {
+		this.billPic = billPic;
+	}
+
+	public Integer getCreateUser() {
 		return createUser;
 	}
 
