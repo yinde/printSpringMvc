@@ -61,7 +61,8 @@ public class EquipmentContoller {
 					
 			String text=strBackUrl+"/jsp/sjk/qrcode.html?equipmentNumber="+equipmentInfo.getEquipmentNumber()+"&userName="+equipmentInfo.getUserName();
 			String path = request.getSession().getServletContext().getRealPath("/")+"Report/";
-			String s = QRCodeUtil.encode(text, path);
+			String logoPath = request.getSession().getServletContext().getRealPath("/")+"jsp/1.png";
+			String s = QRCodeUtil.encode(text, logoPath,path,true);
 			equipmentInfo.setQrCode(s);
 			equipmentInfo.setQrCodePath(strBackUrl+"/Report/"+s);
 			equipmentInfo.setAuditStatus(1);

@@ -615,6 +615,6 @@
 </select>
 
 <insert id="insertBackInfo" parameterType="java.lang.Integer">
-	insert into equipment_info_delete_info select *,#{operationUser,jdbcType=INTEGER},now() from equipment_info where equipment_id = #{equipmentId,jdbcType=INTEGER}
+	insert into equipment_info_delete_info (<include refid="Base_Column_List"></include>,operation_user,operation_time)  select <include refid="Base_Column_List"></include>,#{operationUser,jdbcType=INTEGER},now() from equipment_info where equipment_id = #{equipmentId,jdbcType=INTEGER}
 </insert>
 </mapper>
