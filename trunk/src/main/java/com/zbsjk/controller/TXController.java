@@ -26,35 +26,33 @@ public class TXController {
 	    config.put("SecretId", "AKID51jBNJFPZUFaswfLflcEarujKgoh7r77");
 	    config.put("SecretKey", "JOFrDJAfuud8NM6duwjHZbOwGK8g07zd");
 
-	    /* è¯·æ±‚æ–¹æ³•ç±»å‹ POSTã€GET */
+	    /* ÇëÇó·½·¨ÀàĞÍ POST¡¢GET */
 	    config.put("RequestMethod", "GET");
 
-	    /* åŒºåŸŸå‚æ•°ï¼Œå¯é€‰: gz: å¹¿å·; sh: ä¸Šæµ·; hk: é¦™æ¸¯; ca: åŒ—ç¾; ç­‰ã€‚ */
+	    /* ÇøÓò²ÎÊı£¬¿ÉÑ¡: gz: ¹ãÖİ; sh: ÉÏº£; hk: Ïã¸Û; ca: ±±ÃÀ; µÈ¡£ */
 	    config.put("DefaultRegion", "gz");
-	    //region
 
 	    QcloudApiModuleCenter module = new QcloudApiModuleCenter(new Sts(),
 	            config);
 
 	    TreeMap<String, Object> params = new TreeMap<String, Object>();
-	    /* å°†éœ€è¦è¾“å…¥çš„å‚æ•°éƒ½æ”¾å…¥ params é‡Œé¢ï¼Œå¿…é€‰å‚æ•°æ˜¯å¿…å¡«çš„ã€‚ */
-	    /* DescribeInstances æ¥å£çš„éƒ¨åˆ†å¯é€‰å‚æ•°å¦‚ä¸‹ */
-	    //params.put("name", "test-1251784278");
-	    params.put("name", bucket);
-	    
-	    String policy = "{\"statement\": [{\"action\": [\"name/cos:GetObject\",\"name/cos:PutObject\",\"name/cos:DeleteObject\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-guangzhou:uid/1251784278:prefix//*\"]}],\"version\": \"2.0\"}";
+	    /* ½«ĞèÒªÊäÈëµÄ²ÎÊı¶¼·ÅÈë params ÀïÃæ£¬±ØÑ¡²ÎÊıÊÇ±ØÌîµÄ¡£ */
+	    /* DescribeInstances ½Ó¿ÚµÄ²¿·Ö¿ÉÑ¡²ÎÊıÈçÏÂ */
+	    params.put("name", "fdsafgra");
+	    String policy = "{\"statement\": [{\"action\": [\"name/cos:*\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-guangzhou:uid/1251784278:prefix//1251784278/test/*\"]}],\"version\": \"2.0\"}";
 	    params.put("policy", policy);
 
-	    /* åœ¨è¿™é‡ŒæŒ‡å®šæ‰€è¦ç”¨çš„ç­¾åç®—æ³•ï¼Œä¸æŒ‡å®šé»˜è®¤ä¸º HmacSHA1*/
+	    /* ÔÚÕâÀïÖ¸¶¨ËùÒªÓÃµÄÇ©ÃûËã·¨£¬²»Ö¸¶¨Ä¬ÈÏÎª HmacSHA1*/
 	    //params.put("SignatureMethod", "HmacSHA256");
 
-	    /* generateUrl æ–¹æ³•ç”Ÿæˆè¯·æ±‚ä¸², å¯ç”¨äºè°ƒè¯•ä½¿ç”¨ */
-	    //System.out.println(module.generateUrl("GetFederationToken", params));
+	    /* generateUrl ·½·¨Éú³ÉÇëÇó´®, ¿ÉÓÃÓÚµ÷ÊÔÊ¹ÓÃ */
+	   // System.out.println(module.generateUrl("GetFederationToken", params));
 	    String result = null;
 	    try {
-	        /* call æ–¹æ³•æ­£å¼å‘æŒ‡å®šçš„æ¥å£åå‘é€è¯·æ±‚ï¼Œå¹¶æŠŠè¯·æ±‚å‚æ•° params ä¼ å…¥ï¼Œè¿”å›å³æ˜¯æ¥å£çš„è¯·æ±‚ç»“æœã€‚ */
+	        /* call ·½·¨ÕıÊ½ÏòÖ¸¶¨µÄ½Ó¿ÚÃû·¢ËÍÇëÇó£¬²¢°ÑÇëÇó²ÎÊı params ´«Èë£¬·µ»Ø¼´ÊÇ½Ó¿ÚµÄÇëÇó½á¹û¡£ */
 	        result = module.call("GetFederationToken", params);
 	        JSONObject json_result = JSONObject.parseObject(result);
+	        //JSONObject json_result = new JSONObject(result);
 	        return json_result;
 	    } catch (Exception e) {
 	        System.out.println("error..." + e.getMessage());
