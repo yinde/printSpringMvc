@@ -23,9 +23,16 @@ public class TXController {
 	@ResponseBody
 	public Object getCosKey(@RequestParam(value="bucket",required=true) String bucket, @RequestParam(value="region",required=false) String region,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		TreeMap<String, Object> config = new TreeMap<String, Object>();
-	    config.put("SecretId", "AKID51jBNJFPZUFaswfLflcEarujKgoh7r77");
+	    //140
+		/*config.put("SecretId", "AKID51jBNJFPZUFaswfLflcEarujKgoh7r77");
 	    config.put("SecretKey", "JOFrDJAfuud8NM6duwjHZbOwGK8g07zd");
-
+	     String policy = "{\"statement\": [{\"action\": [\"name/cos:*\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-guangzhou:uid/1251784278:prefix//1251784278/"+bucket+"/*\"]}],\"version\": \"2.0\"}";
+	    */
+		//118
+		config.put("SecretId", "AKIDe2YwY9Y3r1CGCHRIAspGeAkjCujDi7U7");
+	    config.put("SecretKey", "Mw9mplYYgdeXK1YBd2GNbwOvRo0K460F");
+	    String policy = "{\"statement\": [{\"action\": [\"name/cos:*\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-guangzhou:uid/1255970667:prefix//1255970667/"+bucket+"/*\"]}],\"version\": \"2.0\"}";
+	   
 	    /* 请求方法类型 POST、GET */
 	    config.put("RequestMethod", "GET");
 
@@ -39,7 +46,7 @@ public class TXController {
 	    /* 将需要输入的参数都放入 params 里面，必选参数是必填的。 */
 	    /* DescribeInstances 接口的部分可选参数如下 */
 	    params.put("name", "fdsafgra");
-	    String policy = "{\"statement\": [{\"action\": [\"name/cos:*\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-guangzhou:uid/1251784278:prefix//1251784278/test/*\"]}],\"version\": \"2.0\"}";
+	   
 	    params.put("policy", policy);
 
 	    /* 在这里指定所要用的签名算法，不指定默认为 HmacSHA1*/
